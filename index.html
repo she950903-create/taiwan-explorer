@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="台灣景點探險｜互動式台灣旅遊導覽與知識闖關網站">
+<title>台灣景點探險｜Taiwan Explorer</title>
+<style>
+:root{--bg:#f5f7f8;--card:#fff;--text:#172126;--muted:#68777e;--accent:#087f5b;--accent2:#f0a43c;--line:#dce4e7;--dark:#102a2b}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:system-ui,-apple-system,"Noto Sans TC","Microsoft JhengHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+button,a{font:inherit}button{cursor:pointer}.container{width:min(1120px,92%);margin:auto}
+header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{height:70px;display:flex;align-items:center;justify-content:space-between}.brand{font-weight:900;font-size:20px;text-decoration:none;color:var(--dark);display:flex;gap:9px;align-items:center}.brand span{font-size:25px}
+.navlinks{display:flex;gap:22px}.navlinks a{color:var(--muted);text-decoration:none;font-weight:700}.navlinks a:hover{color:var(--accent)}
+.hero{padding:78px 0 64px;background:linear-gradient(135deg,#dff5ec 0%,#fdf8ec 55%,#eef4f6 100%);overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:45px;align-items:center}.eyebrow{color:var(--accent);font-weight:900;letter-spacing:1px}.hero h1{font-size:clamp(40px,6vw,70px);line-height:1.08;margin:12px 0}.hero p{font-size:18px;color:var(--muted);max-width:600px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}.btn{border:0;border-radius:13px;padding:13px 20px;font-weight:850;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}.primary{background:var(--accent);color:white}.secondary{background:white;color:var(--dark);border:1px solid var(--line)}
+.hero-art{min-height:310px;border-radius:28px;background:var(--dark);color:white;position:relative;overflow:hidden;padding:30px;display:flex;align-items:end}.sun{position:absolute;width:130px;height:130px;border-radius:50%;background:#f6b84b;right:45px;top:35px}.mount{position:absolute;bottom:-45px;width:0;height:0;border-left:170px solid transparent;border-right:170px solid transparent;border-bottom:245px solid #1d5551}.mount.m2{left:130px;border-left-width:210px;border-right-width:210px;border-bottom-color:#277066}.mount.m3{right:-80px;border-left-width:220px;border-right-width:220px;border-bottom-color:#153e40}.hero-label{position:relative;z-index:2}.hero-label strong{font-size:30px;display:block}
+section{padding:70px 0}.section-head{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:28px}.section-head h2{font-size:34px;margin:0}.section-head p{color:var(--muted);margin:5px 0}
+.filters{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:22px}.filter{background:white;border:1px solid var(--line);padding:9px 15px;border-radius:999px;font-weight:800;color:var(--muted)}.filter.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.place{background:var(--card);border:1px solid var(--line);border-radius:19px;overflow:hidden;transition:.2s;box-shadow:0 5px 18px rgba(16,42,43,.05)}.place:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(16,42,43,.1)}.place-top{height:150px;padding:20px;display:flex;align-items:end;font-size:45px;background:linear-gradient(135deg,#e1f4ed,#fff1d9)}.place-body{padding:18px}.place-body h3{margin:0 0 5px;font-size:21px}.place-body p{margin:0;color:var(--muted);font-size:14px}.tags{margin-top:12px}.tag{font-size:12px;background:#edf5f2;color:var(--accent);padding:4px 8px;border-radius:999px;margin-right:5px}
+.game{background:var(--dark);color:white}.game .section-head p{color:#b8c7c8}.gamebox{background:white;color:var(--text);border-radius:22px;padding:26px;max-width:780px;margin:auto}.progress{height:9px;background:#e7ecee;border-radius:20px;overflow:hidden;margin:12px 0 25px}.progress>div{height:100%;background:var(--accent);transition:.3s}.game-place{font-size:36px}.question{font-size:22px;font-weight:900;margin:12px 0 18px}.answers{display:grid;gap:10px}.answer{background:#f7f9fa;border:1px solid var(--line);padding:14px;border-radius:13px;text-align:left;font-weight:750}.answer:hover:not(:disabled){border-color:var(--accent);background:#edf8f4}.answer.correct{background:#e0f5e9;border-color:#45a56f}.answer.wrong{background:#fde8e7;border-color:#d86660}.feedback{margin-top:15px;padding:12px;border-radius:12px;background:#f4f7f8;color:var(--muted)}.scorebar{display:flex;justify-content:space-between;gap:10px;font-weight:850}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.stat{background:white;border:1px solid var(--line);border-radius:18px;padding:22px;text-align:center}.stat b{display:block;font-size:32px;color:var(--accent)}
+footer{background:#102a2b;color:#d9e5e6;padding:42px 0}.foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}.small{font-size:13px;color:#91a6a8}
+.modal{position:fixed;inset:0;background:rgba(10,25,28,.58);display:none;align-items:center;justify-content:center;padding:20px;z-index:50}.modal.show{display:flex}.modalbox{background:white;color:var(--text);width:min(620px,100%);max-height:90vh;overflow:auto;border-radius:22px;padding:25px}.close{float:right;border:0;background:#eef2f3;border-radius:10px;width:40px;height:40px;font-size:20px}.detail-icon{font-size:65px}.modalbox h2{margin:8px 0}.modalbox p{color:var(--muted)}
+@media(max-width:800px){.hero-grid{grid-template-columns:1fr}.hero-art{min-height:240px}.grid{grid-template-columns:1fr 1fr}.navlinks{display:none}.section-head{display:block}.stats{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.grid{grid-template-columns:1fr}.hero{padding:55px 0}.hero h1{font-size:43px}.stats{grid-template-columns:1fr}.gamebox{padding:19px}}
+</style>
+</head>
+<body>
+<header><div class="container nav">
+<a class="brand" href="#"><span>🇹🇼</span> Taiwan Explorer</a>
+<nav class="navlinks"><a href="#places">景點探索</a><a href="#game">互動闖關</a><a href="#about">關於網站</a></nav>
+</div></header>
+
+<main>
+<section class="hero"><div class="container hero-grid">
+<div><div class="eyebrow">TAIWAN · EXPLORE · PLAY</div><h1>用遊戲，認識台灣。</h1><p>從北到南探索台灣特色景點，閱讀景點故事，再用互動問答挑戰你的旅遊知識。</p>
+<div class="actions"><a class="btn primary" href="#places">開始探索 →</a><a class="btn secondary" href="#game">直接挑戰</a></div></div>
+<div class="hero-art" aria-label="台灣山景示意圖"><div class="sun"></div><div class="mount"></div><div class="mount m2"></div><div class="mount m3"></div><div class="hero-label"><strong>🇹🇼 Taiwan</strong><span>每一站，都有新的故事。</span></div></div>
+</div></section>
+
+<section id="places"><div class="container">
+<div class="section-head"><div><h2>探索景點</h2><p>選擇地區，看看你想去哪裡。</p></div></div>
+<div class="filters" id="filters"><button class="filter active" data-region="all">全部</button><button class="filter" data-region="north">北台灣</button><button class="filter" data-region="central">中台灣</button><button class="filter" data-region="south">南台灣</button><button class="filter" data-region="east">東台灣</button></div>
+<div class="grid" id="placeGrid"></div>
+</div></section>
+
+<section id="game" class="game"><div class="container">
+<div class="section-head"><div><h2>🎮 台灣知識闖關</h2><p>答對一題 100 分，看看你能不能成為台灣旅遊達人！</p></div></div>
+<div class="gamebox" id="gamebox"></div>
+</div></section>
+
+<section id="about"><div class="container">
+<div class="section-head"><div><h2>旅遊達人紀錄</h2><p>你的挑戰成果會保留在這個瀏覽器中。</p></div></div>
+<div class="stats"><div class="stat"><b id="bestScore">0</b>最高分</div><div class="stat"><b id="played">0</b>完成次數</div><div class="stat"><b id="correctCount">0</b>答對題數</div></div>
+</div></section>
+</main>
+
+<footer><div class="container foot"><div><strong>🇹🇼 Taiwan Explorer</strong><div class="small">互動式台灣景點導覽網站</div></div><div class="small">景點資訊僅作為旅遊知識展示，實際開放資訊請以官方公告為準。</div></div></footer>
+
+<div class="modal" id="modal"><div class="modalbox"><button class="close" id="close">×</button><div id="modalContent"></div></div></div>
+
+<script>
+const places=[
+{name:"台北 101",region:"north",icon:"🏙️",city:"台北市",desc:"台北最具代表性的城市地標之一，從高空眺望台北盆地。",tags:["城市地標","觀景"]},
+{name:"九份",region:"north",icon:"🏮",city:"新北市",desc:"依山而建的山城，以老街、茶館與山海景色聞名。",tags:["山城","老街"]},
+{name:"野柳地質公園",region:"north",icon:"🌊",city:"新北市",desc:"海岸風化與侵蝕形成獨特岩石景觀，是北海岸代表景點。",tags:["自然","海岸"]},
+{name:"日月潭",region:"central",icon:"🌅",city:"南投縣",desc:"台灣知名湖泊，環湖山景與湖光是熱門旅遊特色。",tags:["湖泊","自然"]},
+{name:"清境農場",region:"central",icon:"🐑",city:"南投縣",desc:"高山草原與農場景觀著名，常能看見綿羊等動物。",tags:["高山","農場"]},
+{name:"彩虹眷村",region:"central",icon:"🎨",city:"台中市",desc:"以繽紛彩繪聞名的特色文化景點。",tags:["藝術","文化"]},
+{name:"阿里山",region:"south",icon:"🌲",city:"嘉義縣",desc:"以森林、日出、雲海與山林鐵路等景觀聞名。",tags:["森林","日出"]},
+{name:"赤崁樓",region:"south",icon:"🏯",city:"台南市",desc:"台南重要歷史古蹟之一，具有豐富的城市歷史背景。",tags:["歷史","古蹟"]},
+{name:"墾丁",region:"south",icon:"🏝️",city:"屏東縣",desc:"台灣南端的熱門旅遊區，以海岸與自然景觀著名。",tags:["海岸","自然"]},
+{name:"太魯閣",region:"east",icon:"⛰️",city:"花蓮縣",desc:"以峽谷與大理岩地形聞名的自然景觀。實際開放狀況請依官方公告。",tags:["峽谷","山岳"]},
+{name:"七星潭",region:"east",icon:"🌊",city:"花蓮縣",desc:"花蓮著名海岸景觀，可欣賞太平洋與海岸線。",tags:["海岸","景觀"]},
+{name:"伯朗大道",region:"east",icon:"🌾",city:"台東縣",desc:"縱谷田園景觀代表地點，適合感受台東開闊的農村風光。",tags:["田園","台東"]}
+];
+
+const questions=[
+["台北 101 位於哪個城市？",["台北市","台中市","高雄市","花蓮縣"],0,"台北 101 位於台北市。"],
+["日月潭位於哪個縣？",["苗栗縣","台中市","南投縣","嘉義縣"],2,"日月潭位於南投縣。"],
+["赤崁樓位於哪個城市？",["高雄市","台南市","屏東縣","嘉義市"],1,"赤崁樓位於台南市。"],
+["阿里山最著名的景觀組合之一是？",["日出與雲海","珊瑚礁與潮池","沙丘與駱駝","冰河與雪山"],0,"阿里山以日出、雲海、森林等景觀聞名。"],
+["九份主要位於哪個縣市？",["宜蘭縣","新北市","基隆市","桃園市"],1,"九份位於新北市瑞芳區。"],
+["墾丁位於台灣哪個區域？",["北部","東部","南部","西北部"],2,"墾丁位於台灣南端的屏東縣。"],
+["野柳特殊岩石景觀主要與什麼作用有關？",["風化與海蝕","冰河侵蝕","沙漠化","火山灰沉積"],0,"野柳的地形景觀與長期風化、海蝕等作用有關。"],
+["彩虹眷村位於哪個城市？",["台中市","台北市","台南市","新竹市"],0,"彩虹眷村位於台中市。"]
+];
+
+const grid=document.getElementById("placeGrid");
+function renderPlaces(region="all"){
+grid.innerHTML="";
+places.filter(p=>region==="all"||p.region===region).forEach((p,i)=>{
+const el=document.createElement("article");el.className="place";
+el.innerHTML=`<div class="place-top">${p.icon}</div><div class="place-body"><div class="small">${p.city}</div><h3>${p.name}</h3><p>${p.desc}</p><div class="tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div></div>`;
+el.addEventListener("click",()=>openPlace(p));grid.appendChild(el);
+});
+}
+function openPlace(p){
+document.getElementById("modalContent").innerHTML=`<div class="detail-icon">${p.icon}</div><div class="small">${p.city}</div><h2>${p.name}</h2><p>${p.desc}</p><div class="tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join("")}</div><p style="margin-top:22px"><strong>旅行小提示：</strong>出發前建議確認交通、開放時間與現場公告。</p>`;
+document.getElementById("modal").classList.add("show");
+}
+document.getElementById("close").onclick=()=>document.getElementById("modal").classList.remove("show");
+document.getElementById("modal").addEventListener("click",e=>{if(e.target.id==="modal")e.currentTarget.classList.remove("show")});
+document.querySelectorAll(".filter").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));b.classList.add("active");renderPlaces(b.dataset.region)}));
+renderPlaces();
+
+let qi=0,score=0,answered=false;
+const box=document.getElementById("gamebox");
+function renderGame(){
+const q=questions[qi];answered=false;
+box.innerHTML=`<div class="scorebar"><span>第 ${qi+1} / ${questions.length} 題</span><span>⭐ ${score} 分</span></div><div class="progress"><div style="width:${qi/questions.length*100}%"></div></div><div class="question">${q[0]}</div><div class="answers" id="answers"></div><div id="feedback" class="feedback" hidden></div>`;
+q[1].forEach((a,i)=>{const b=document.createElement("button");b.className="answer";b.textContent=String.fromCharCode(65+i)+"．"+a;b.addEventListener("click",()=>answer(i,b));document.getElementById("answers").appendChild(b)});
+}
+function answer(i,btn){
+if(answered)return;answered=true;const q=questions[qi];document.querySelectorAll(".answer").forEach(b=>b.disabled=true);
+if(i===q[2]){score+=100;btn.classList.add("correct")}else{btn.classList.add("wrong");document.querySelectorAll(".answer")[q[2]].classList.add("correct")}
+const f=document.getElementById("feedback");f.hidden=false;f.innerHTML=`${i===q[2]?"✅ 答對了！":"❌ 答錯了。"} ${q[3]}<br><button class="btn primary" id="next" style="margin-top:10px">${qi===questions.length-1?"查看結果":"下一題 →"}</button>`;
+document.getElementById("next").onclick=()=>{qi++;if(qi<questions.length)renderGame();else finish()};
+}
+function finish(){
+let best=Number(localStorage.getItem("twBest")||0),played=Number(localStorage.getItem("twPlayed")||0),correct=Number(localStorage.getItem("twCorrect")||0);
+if(score>best)localStorage.setItem("twBest",score);localStorage.setItem("twPlayed",played+1);localStorage.setItem("twCorrect",correct+score/100);
+const level=score===800?"🏆 台灣旅遊大師":score>=600?"🌟 超強旅遊達人":score>=400?"👏 不錯的旅遊玩家":"🧭 繼續探索台灣吧";
+box.innerHTML=`<div style="text-align:center;padding:18px"><div style="font-size:55px">${score===800?"🏆":score>=600?"🌟":"🧭"}</div><h2>${level}</h2><p>你的最終分數</p><div style="font-size:48px;font-weight:900;color:var(--accent)">${score}<span style="font-size:20px"> / 800</span></div><button class="btn primary" id="restart">再挑戰一次</button></div>`;
+document.getElementById("restart").onclick=()=>{qi=0;score=0;renderGame();updateStats()};
+updateStats();
+}
+function updateStats(){document.getElementById("bestScore").textContent=localStorage.getItem("twBest")||0;document.getElementById("played").textContent=localStorage.getItem("twPlayed")||0;document.getElementById("correctCount").textContent=localStorage.getItem("twCorrect")||0}
+renderGame();updateStats();
+</script>
+</body>
+</html>
